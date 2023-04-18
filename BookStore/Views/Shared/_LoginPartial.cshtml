@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navabar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <img src="~/Images/user.png" class="user-pic" onclick="toggleMenu()" />
+        <div class="dropdown">
+            <span class="fas fa-caret-down" onclick="toggleMenu()"></span>
+        </div>
+        <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+                <div class="user-info">
+                    @Html.ActionLink("Xin chào " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </div>
+                <hr />
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="sub-menu-link">
+                    <i class="fas fa-sign-out-alt "></i>
+                    <span>Đăng xuất</span>
+                    <i>></i>
+                </a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="navbar-right">
+        <ul class="register">
+            <li>@Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "login" })</li>
+        </ul>
+        <ul class="login">
+            <li>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "register" })</li>
+        </ul>
+    </div>
+}
+
+<script>
+    let subMenu = document.getElementById("subMenu");
+
+    function toggleMenu() {
+        subMenu.classList.toggle("open-menu");
+    }
+</script>

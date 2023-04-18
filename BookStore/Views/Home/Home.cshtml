@@ -1,0 +1,23 @@
+﻿@model PagedList.IPagedList<BookStore.Models.Book>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+           <div class="card col-sm-6 col-md-4 d-flex align-items-stretch book-section" style=" padding:30px; text-align:center;">
+              <div style="background-color:#f8f8f8; border-radius:20px;">
+                  <img class="card-img-top book-picture" src="@item.image" height="300">
+                  <div class="card-body">
+                      <h4 class="card-title">@item.price</h4>
+                      <p class="card-text">@item.publisher.name</p>
+                      <a href="/Cart/AddCart/@item.bookID" class="btn btn-primary add-cart">Thêm Vào Giỏ</a>
+                  </div>
+                  <br />
+              </div>
+           </div>
+    }
+</div>

@@ -1,0 +1,102 @@
+﻿@model BookStore.Models.Bill
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h2>Xóa thông tin hóa đơn</h2>
+    <h4>Bạn có chắc chắn muốn xóa thông tin này không?</h4>
+    <dl class="dt-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KhachHang.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delivered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delivered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nameCustomer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameCustomer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryForm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryForm)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a href="/Bills" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
+        </div>
+    }
+</div>

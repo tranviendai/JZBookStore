@@ -1,0 +1,88 @@
+﻿@model BookStore.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <h2>Chi tiết thông tin sách</h2>
+    <dl class="dt-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.publisher.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publisher.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subject.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subject.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sellNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sellNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.bookID})" class="btn btn-success">Sửa</a>
+    <a href="/Books" style="text-decoration: none">Quay trở lại</a>
+</p>

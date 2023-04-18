@@ -1,0 +1,56 @@
+﻿@model BookStore.Models.DetailsOrder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <h2>Chi tiết thông tin đơn hàng</h2>
+    <dl class="dt-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bill.nameCustomer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bill.nameCustomer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.index})" class="btn btn-success">Sửa</a>
+    <a href="/DetailsOrders" style="text-decoration: none">Quay trở lại</a>
+</p>

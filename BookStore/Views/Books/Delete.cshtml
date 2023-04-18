@@ -1,0 +1,93 @@
+﻿@model BookStore.Models.Book
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h2>Xóa thông tin sách</h2>
+    <h4>Bạn có chắc chắn muốn xóa thông tin này không?</h4>
+    <dl class="dt-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.publisher.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publisher.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subject.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subject.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sellNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sellNumber)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a href="/Books" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,103 @@
+﻿@model BookStore.Models.Book
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>Chỉnh sửa thông tin sách</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.bookID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+            <div class="mb-3 mt-3">
+                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.unit, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+            <div class="mb-3 mt-3">
+                @Html.EditorFor(model => model.unit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.unit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+            <div class="mb-3 mt-3">
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+            <div class="mb-3 mt-3">
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+            <div class="mb-3 mt-3">
+                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.updateDate, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+            <div class="mb-3 mt-3">
+                @Html.EditorFor(model => model.updateDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.updateDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sellNumber, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+            <div class="mb-3 mt-3">
+                @Html.EditorFor(model => model.sellNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sellNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.subjectID, "subjectID", htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+            <div class="mb-3 mt-3">
+                @Html.DropDownList("subjectID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.subjectID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.publisherID, "publisherID", htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+            <div class="mb-3 mt-3">
+                @Html.DropDownList("publisherID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.publisherID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="back mb-3 mt-3">
+                <input type="submit" value="Lưu" class="btn btn-primary" style="margin-right: 10px;" />
+                @Html.ActionLink("Quay trở lại", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

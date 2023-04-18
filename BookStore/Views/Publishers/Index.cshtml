@@ -1,0 +1,78 @@
+﻿
+@model PagedList.IPagedList<BookStore.Models.Publisher>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="font-weight: 600">Quản lý tác giả</h2>
+<div class="create">
+    <a href="@Url.Action("Create")" class="bg-primary btn-lg"><span class="fas fa-plus-circle"></span><span>Tạo mới</span></a>
+</div>
+
+@using (Html.BeginForm("Index", "Publishers", FormMethod.Get))
+{
+    <div class="search">
+        <span>
+            Tên tác giả:
+            <input id="name" name="name" type="text" value="">
+        </span>
+        <span>
+            Địa chỉ:
+            <input id="address" name="address" type="text" value="">
+        </span>
+        <input id="Submit1" type="submit" value="Tìm kiếm" />
+    </div>
+}
+<table class="table">
+    <thead class="table-bordered">
+        <tr class="bg-success">
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Họ tên", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Địa chỉ", "Index", new { sortOrder = ViewBag.AddressSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("SĐT", "Index", new { sortOrder = ViewBag.PhoneSortParm })
+            </th>
+            <th>Hành động</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone)
+                </td>
+                <td class="action">
+                    <a href="@Url.Action("Edit", new { id = item.publisherID})" style="color: green; text-decoration: none">
+                        <span class="fas fa-edit"></span>
+                    </a>
+                    <a href="@Url.Action("Details", new { id = item.publisherID })" style="color: blue; text-decoration: none">
+                        <span class="fas fa-eye"></span>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.publisherID })" style="color: red; text-decoration: none">
+                        <span class="fas fa-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        }
+        </thead>
+</table>
+<div style="float: right">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) của @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page }))
+</div>

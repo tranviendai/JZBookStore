@@ -1,0 +1,46 @@
+﻿@model BookStore.Models.Publisher
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h2>Xóa thông tin nhà xuất bản</h2>
+    <h4>Bạn có chắc chắn muốn xóa thông tin này không?</h4>
+    <dl class="dt-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Xóa" class="btn btn-danger" />
+    <a href="/Publishers" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
+</div>
+    }
+</div>

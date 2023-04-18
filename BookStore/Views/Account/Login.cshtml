@@ -1,0 +1,55 @@
+﻿@using BookStore.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+<div class="forms-container">
+    <div class="form-horizontal col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h2 style="text-align:center">Đăng nhập</h2>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "mb-3 mt-3 control-label" })
+                    <div class="mb-3 mt-3">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "mb-3 mt-3 control-label" })
+                    <div class="mb-3 mt-3">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="mb-3 mt-3">
+                        <div class="checkbox" style="margin-left: 20px;">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="mb-3 mt-3">
+                        <input type="submit" value="Đăng nhập" class="btn btn-success" style="width: 100%; background: #68B984" />
+                    </div>
+                </div>
+                <p style="text-align:center; text-decoration: none!important">
+                    Chưa có tài khoản? <a style="text-decoration:none" href="/Account/Register">Đăng ký ngay</a>
+                </p>
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

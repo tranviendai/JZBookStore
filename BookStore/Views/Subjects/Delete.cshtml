@@ -1,0 +1,30 @@
+﻿@model BookStore.Models.Subject
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h2>Xóa thông tin chủ đề</h2>
+    <h4>Bạn có chắc chắn muốn xóa thông tin này không?</h4>
+    <dl class="dt-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a href="/Subjects" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
+        </div>
+    }
+</div>

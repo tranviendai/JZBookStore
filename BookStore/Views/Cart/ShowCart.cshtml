@@ -1,0 +1,148 @@
+﻿@using BookStore.Models
+@model Cart
+
+@{
+    ViewBag.Title = "ShowCart";
+}
+
+
+@if (Model.Total() != 0)
+{
+    <h2>Giỏ Hàng Của Tôi</h2>
+    <table class="table">
+        <thead class="table-bordered">
+            <tr class="bg-success">
+                <th>Hình Ảnh</th>
+                <th>Tên Sách</th>
+                <th>Giá Sách</th>
+                <th>Số lượng</th>
+
+                <th>Tổng tiền</th>
+                <th>Hành động</th>
+            </tr>
+
+            @foreach (var item in Model.Items)
+            {
+                decimal total = Convert.ToDecimal(item.book.price * item.quantity);
+                <tr style="height:200px;align-items:center;">
+                 
+                    <td>
+                        <img src="@item.book.image" height="200px;" />
+                    </td>
+                    <td style="width:200px;">@item.book.title</td>
+                    <td style="width: 200px;">@Html.Label("", string.Format("{0:N0}", @item.book.price), new {style= "font-weight:initial !important;" }) @item.book.unit</td>
+                    <td>
+                        @using (Html.BeginForm("UpdateCart", "Cart"))
+                        {
+                            <input type="hidden" value="@item.book.bookID" name="bookID" />
+                            <div>
+                                <input type="number" value="@item.quantity" name="quantity" style="width:60px; border-radius: 4px; text-align: center" />
+                                <input type="submit" value="Cập Nhật" class="btn btn-primary" />
+                            </div>
+
+                        }
+                    </td>
+                    <td>@Html.Label("", string.Format("{0:N0}", total), new { style = "display:contents" }) @item.book.unit</td>
+                    <td class="action">
+                        <a href="/Cart/RemoveCart/@item.book.bookID" style="color: red; text-decoration: none">
+                            <span class="fas fa-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </thead>
+    </table>
+    @*@Html.Label("", string.Format("{0:N0}", Model.Total()), new { style = "float:right;" })*@
+    using (Html.BeginForm("CheckOut", "Cart"))
+    {
+        <section class="container" style="max-width: 500px">
+            <form class="form-cart">
+                <div class="form-group">
+
+                    <div class="form-group col-md-6">
+                        <label>Hình thức giao hàng</label>
+                        <div>
+                            @Html.RadioButton("deliveryForm", true)
+                            Giao Hàng Nhanh
+                        </div>
+                        <div>
+                            @Html.RadioButton("deliveryForm", false)
+                            Giao Hàng Tiết Kiệm
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Hình thức thanh toán</label>
+                        <div>
+                            @Html.RadioButton("payment", true)
+                            Thanh Toán Trực Tuyến
+                        </div>
+                        <div>
+                            @Html.RadioButton("payment", false)
+                            Thanh Toán Trực Tiếp
+                        </div>
+                    </div>
+                </div>
+                    <div class="form-group col-md-6">
+                        <label>Voucher</label>
+                        <div class="mb-3 mt-3">
+                            @Html.RadioButton("voucher", 1)
+                            Voucher Việt
+                        </div>
+                        <div class="mb-3 mt-3">
+                            @Html.RadioButton("voucher", 2)
+                            Voucher USD
+                        </div>
+                    </div>
+                <div class="form-group">
+
+                    <div class="form-group col-md-6">
+                        <div class="mb-3 mt-3">
+                            <label>Địa Chỉ Nhận</label>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <input type="text" name="address" required class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group col-md-6">
+                        <div class="mb-3 mt-3">
+                            <label>Tên Người Nhận</label>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <input type="text" name="shipName" required class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="form-group col-md-6">
+                        <div class="mb-3 mt-3">
+                            <label>Điện Thoại Người Nhận</label>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <input type="text" name="shipPhone" required class="form-control" style="width:100%" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group col-md-6" style="padding-top: 24px;">
+                        <div class="mb-3 mt-3">
+                            <input type="submit" value="Đặt Vé" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    }
+}
+else
+{
+    <br />
+    <pre style="text-align:center; color:red;">Bạn chưa có gì trong giỏ hàng, xin mời bạn quay vào trang chủ để chọn sách nhé >.<    
+<a href="~/Home/Home" style="text-decoration: none;">Ấn Vào Đây Nè</a></pre>
+
+}

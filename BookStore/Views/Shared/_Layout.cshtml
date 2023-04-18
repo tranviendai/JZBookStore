@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+</head>
+<body>
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <a href="@Url.Action("Home", "Home")">
+                <h2><span class="fab fa-accusoft"></span><span>Booklife</span></h2>
+            </a>
+        </div>
+        <div class="sidebar-menu">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="@Url.Action("Home", "Home")">
+                        <span class="fas fa-home"></span>
+                        <span>Trang chủ</span>
+                    </a>
+                </li>
+                @if (User.Identity.IsAuthenticated == true)
+                {
+                    if (User.IsInRole("Admin") == true)
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "Subjects")">
+                                <span class="fas fa-swatchbook"></span>
+                                <span>Chủ đề</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Authors")">
+                                <span class="fas fa-feather-alt"></span>
+                                <span>Tác giả</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Publishers")">
+                                <span class="fas fa-bookmark"></span>
+                                <span>Nhà xuất bản</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Books")">
+                                <span class="fas fa-book"></span>
+                                <span>Sách</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "Vouchers")">
+                                <span class="fas fa-book-reader"></span>
+                                <span>Vouchers</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "DetailsOrders")">
+                                <span class="fas fa-shopping-cart"></span>
+                                <span>Chi tiết đơn hàng</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "Bills")">
+                                <span class="fas fa-file-invoice-dollar"></span>
+                                <span>Hóa đơn</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Index")">
+                                <span class="fas fa-home"></span>
+                                <span>Báo Cáo Thống Kê (Chưa Update)</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("ShowCart", "Cart")">
+                                <span class="fas fa-file-invoice-dollar"></span>
+                                <span>Giỏ Hàng Của Tôi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Bills")">
+                                <span class="fas fa-file-invoice-dollar"></span>
+                                <span>Hóa đơn</span>
+                            </a>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span class="fas fa-bars" style="cursor: pointer"></span>
+                </label>
+            </h2>
+            @Html.Partial("_LoginPartial")
+        </header>
+        <main>
+            @RenderBody()
+        </main>
+
+        <div class="container body-content">
+            <hr />
+            <footer>
+            </footer>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

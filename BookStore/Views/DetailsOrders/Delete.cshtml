@@ -1,0 +1,63 @@
+﻿@model BookStore.Models.DetailsOrder
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div>
+    <h2>Xóa thông tin chi tiết đơn hàng</h2>
+    <h4>Bạn có chắc chắn muốn xóa thông tin này không?</h4>
+    <dl class="dt-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bill.nameCustomer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bill.nameCustomer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalPrice)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a href="/DetailsOrders" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
+        </div>
+    }
+</div>

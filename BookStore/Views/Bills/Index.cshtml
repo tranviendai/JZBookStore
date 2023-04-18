@@ -1,0 +1,125 @@
+﻿@model PagedList.IPagedList<BookStore.Models.Bill>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="font-weight: 600">Quản lý hóa đơn</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="create">
+        <a href="@Url.Action("Create")" class="bg-primary btn-lg"><span class="fas fa-plus-circle"></span><span>Tạo mới</span></a>
+    </div>
+}
+
+@using (Html.BeginForm("Index", "Bills", FormMethod.Get))
+{
+    <div class="search">
+        <span>
+            Tên khách hàng:
+            <input id="fullname" name="fullname" type="text" value="">
+        </span>
+        <input id="Submit1" type="submit" value="Tìm kiếm" />
+
+    </div>
+}
+<table class="table">
+    <thead class="table-bordered">
+        <tr class="bg-success">
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Họ tên", "Index", new { sortOrder = ViewBag.FullnameSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Ngày lập HĐ", "Index", new { sortOrder = ViewBag.DateSortParm })
+            </th>
+
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Đã giao", "Index", new { sortOrder = ViewBag.DeliveredSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Ngày giao", "Index", new { sortOrder = ViewBag.DeliveryDateSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Tên Người Nhận", "Index", new { sortOrder = ViewBag.NameCustomerSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Địa chỉ nhận", "Index", new { sortOrder = ViewBag.DeliveryAddressSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("SĐT", "Index", new { sortOrder = ViewBag.ShipPhoneDateSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Hình thức GH", "Index", new { sortOrder = ViewBag.PaymentSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Hình Thức TT", "Index", new { sortOrder = ViewBag.DeliveryFormSortParm })
+            </th>
+            <th>
+                Giảm Giá
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Tổng HĐ", "Index", new { sortOrder = ViewBag.PriceSortParm })
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (User.Identity.Name == item.KhachHang.Email || User.IsInRole("Admin"))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KhachHang.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.delivered)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deliveryDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nameCustomer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deliveryAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.shipPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.payment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deliveryForm)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Voucher.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                </tr>
+            }
+        }
+    </thead>
+</table>
+<div style="float: right">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) của @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

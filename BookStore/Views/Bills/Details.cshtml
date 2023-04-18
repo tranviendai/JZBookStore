@@ -1,0 +1,96 @@
+﻿@model BookStore.Models.Bill
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <h2>Chi tiết thông tin hóa đơn</h2>
+    <dl class="dt-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KhachHang.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.delivered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.delivered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nameCustomer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameCustomer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryForm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryForm)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.billID})" class="btn btn-success">Sửa</a>
+    <a href="/Bills" style="text-decoration: none">Quay trở lại</a>
+</p>
