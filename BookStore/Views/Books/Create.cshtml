@@ -6,12 +6,15 @@
 
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Books", FormMethod.Post, new
+{
+    @enctype = "multipart/form-data"
+}))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h2>Tạo mới thông tin sách</h2>
+        <h2 style="font-weight: 600">Tạo mới thông tin sách</h2>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
@@ -29,7 +32,7 @@
                                            {
                                               new SelectListItem {Text = "VND"},
                                               new SelectListItem {Text = "USD"},
-                                           }, new { @class = "form-control" })
+                                           }, new { @class = "form-control" , Style= "max-width:370px!important" })
                 @Html.ValidationMessageFor(model => model.unit, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -45,7 +48,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
             <div class="mb-3 mt-3">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control", Style = "height:600px;resize:inherit " } })*@
+                @Html.TextAreaFor(model => model.description, new { @class = "form-control", Style = "height:200px;max-width:370px!important;resize:inherit " })
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -53,11 +57,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
             <div class="mb-3 mt-3">
-                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })*@
+                <img src="~/Images/add.png" style="height: 180px; width: auto; box-shadow: 0px 0px 0px 1px inset, 0px 0px 0px 1px #b3b0b0;
+                margin-bottom: 10px; margin-top: 5px; margin-left: 1px;" id="previewImage"/>
+                <input type="file" name="image" onchange="ShowImagePreview(this, document.getElementById('previewImage'))"/>
                 @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
             </div>
         </div>
-      
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.sellNumber, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
@@ -70,7 +77,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.subjectID, "Chủ Đề", htmlAttributes: new { @class = "control-label mb-3 mt-3" })
             <div class="mb-3 mt-3">
-                @Html.DropDownList("subjectID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("subjectID", null, htmlAttributes: new { @class = "form-control", Style = "max-width:370px!important" })
                 @Html.ValidationMessageFor(model => model.subjectID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -78,7 +85,7 @@
         <div class="form-group">
             @Html.Label("", "Nhà Xuất Bản", htmlAttributes: new { @class = "control-label mb-3 mt-3" })
             <div class="mb-3 mt-3">
-                @Html.DropDownList("publisherID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("publisherID", null, htmlAttributes: new { @class = "form-control", Style = "max-width:370px!important" })
                 @Html.ValidationMessageFor(model => model.publisherID, "", new { @class = "text-danger" })
             </div>
         </div>

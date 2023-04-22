@@ -7,7 +7,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2 style="font-weight: 600">Quản lý tác giả</h2>
+<h2 style="font-weight: 600">Quản lý nhà xuất bản</h2>
 <div class="create">
     <a href="@Url.Action("Create")" class="bg-primary btn-lg"><span class="fas fa-plus-circle"></span><span>Tạo mới</span></a>
 </div>
@@ -72,7 +72,7 @@
         </thead>
 </table>
 <div style="float: right">
-    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) của @Model.PageCount
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
     @Html.PagedListPager(Model, page => Url.Action("Index",
             new { page }))
 </div>

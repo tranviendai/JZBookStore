@@ -69,13 +69,13 @@
                     @Html.DisplayFor(modelItem => item.totalPrice)
                 </td>
                 <td class="action">
-                    <a href="@Url.Action("Edit", new { id = item.bookID})" style="color: green; text-decoration: none">
+                    <a href="@Url.Action("Edit", new { id = item.index})" style="color: green; text-decoration: none">
                         <span class="fas fa-edit"></span>
                     </a>
-                    <a href="@Url.Action("Details", new { id = item.bookID })" style="color: blue; text-decoration: none">
+                    <a href="@Url.Action("Details", new { id = item.index })" style="color: blue; text-decoration: none">
                         <span class="fas fa-eye"></span>
                     </a>
-                    <a href="@Url.Action("Delete", new { id = item.bookID })" style="color: red; text-decoration: none">
+                    <a href="@Url.Action("Delete", new { id = item.index })" style="color: red; text-decoration: none">
                         <span class="fas fa-trash"></span>
                     </a>
                 </td>
@@ -85,7 +85,7 @@
 
 </table>
 <div style="float: right">
-    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) của @Model.PageCount
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
     @Html.PagedListPager(Model, page => Url.Action("Index",
             new { page }))
 </div>

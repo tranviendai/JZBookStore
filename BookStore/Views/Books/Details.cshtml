@@ -9,23 +9,7 @@
     <h2>Chi tiết thông tin sách</h2>
     <dl class="dt-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.publisher.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.publisher.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.subject.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.subject.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.title)
+            @Html.DisplayNameFor(model => model.title):
         </dt>
 
         <dd>
@@ -33,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.unit)
+            @Html.DisplayNameFor(model => model.unit):
         </dt>
 
         <dd>
@@ -41,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.price)
+            @Html.DisplayNameFor(model => model.price):
         </dt>
 
         <dd>
@@ -49,7 +33,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.description)
+            @Html.DisplayNameFor(model => model.description):
         </dt>
 
         <dd>
@@ -57,15 +41,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.image)
+            @Html.DisplayNameFor(model => model.image):
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.image)
+            <img src="~/Images/@Model.image" style="height: 180px;"/>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.updateDate)
+            @Html.DisplayNameFor(model => model.updateDate):
         </dt>
 
         <dd>
@@ -73,7 +57,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.sellNumber)
+            @Html.DisplayNameFor(model => model.sellNumber):
         </dt>
 
         <dd>

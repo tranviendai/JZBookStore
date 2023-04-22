@@ -11,7 +11,7 @@ namespace BookStore.Models
     {
         [Key]
         public int VoucherID { get; set; }
-        [MaxLength(20)]
+        [MaxLength(100)]
         public string Name { get; set; }
         public decimal Price { get; set; }
         public ICollection<Bill> bills { get; set; }

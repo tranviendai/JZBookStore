@@ -8,7 +8,7 @@
 
 @if (Model.Total() != 0)
 {
-    <h2>Giỏ Hàng Của Tôi</h2>
+    <h2 style="font-weight:600">Giỏ Hàng Của Tôi</h2>
     <table class="table">
         <thead class="table-bordered">
             <tr class="bg-success">
@@ -25,12 +25,12 @@
             {
                 decimal total = Convert.ToDecimal(item.book.price * item.quantity);
                 <tr style="height:200px;align-items:center;">
-                 
+
                     <td>
-                        <img src="@item.book.image" height="200px;" />
+                        <img src="~/Images/@item.book.image" style="height: 180px;" />
                     </td>
                     <td style="width:200px;">@item.book.title</td>
-                    <td style="width: 200px;">@Html.Label("", string.Format("{0:N0}", @item.book.price), new {style= "font-weight:initial !important;" }) @item.book.unit</td>
+                    <td style="width: 200px;">@Html.Label("", string.Format("{0:N0}", @item.book.price), new { style = "font-weight:initial !important;" }) @item.book.unit</td>
                     <td>
                         @using (Html.BeginForm("UpdateCart", "Cart"))
                         {
@@ -50,50 +50,53 @@
                     </td>
                 </tr>
             }
-
+            <tr style="font-weight:bold; text-align:right; color:red;">
+                <td colspan="6"><span style="margin-right: 5px">Tổng tiền:  <span> @Html.Label("", string.Format("{0:N0}", Model.Total()), new { style = "float:right;" })</span></span></td>
+            </tr>
         </thead>
+        
     </table>
-    @*@Html.Label("", string.Format("{0:N0}", Model.Total()), new { style = "float:right;" })*@
+   
     using (Html.BeginForm("CheckOut", "Cart"))
     {
-        <section class="container" style="max-width: 500px">
+        <section class="container" style="max-width: 650px">
             <form class="form-cart">
                 <div class="form-group">
-
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4 mb-3">
+                        <label>Voucher</label>
+                        <div>
+                            @Html.RadioButton("voucher", 2)
+                            Voucher Việt
+                        </div>
+                        <div>
+                            @Html.RadioButton("voucher", 1)
+                            Voucher USD
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
                         <label>Hình thức giao hàng</label>
                         <div>
-                            @Html.RadioButton("deliveryForm", true)
+                            @Html.RadioButton("deliveryForm", false)
                             Giao Hàng Nhanh
                         </div>
                         <div>
-                            @Html.RadioButton("deliveryForm", false)
+                            @Html.RadioButton("deliveryForm", true)
                             Giao Hàng Tiết Kiệm
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4 mb-3">
                         <label>Hình thức thanh toán</label>
                         <div>
-                            @Html.RadioButton("payment", true)
+                            @Html.RadioButton("payment", false)
                             Thanh Toán Trực Tuyến
                         </div>
                         <div>
-                            @Html.RadioButton("payment", false)
+                            @Html.RadioButton("payment", true)
                             Thanh Toán Trực Tiếp
                         </div>
                     </div>
                 </div>
-                    <div class="form-group col-md-6">
-                        <label>Voucher</label>
-                        <div class="mb-3 mt-3">
-                            @Html.RadioButton("voucher", 1)
-                            Voucher Việt
-                        </div>
-                        <div class="mb-3 mt-3">
-                            @Html.RadioButton("voucher", 2)
-                            Voucher USD
-                        </div>
-                    </div>
+
                 <div class="form-group">
 
                     <div class="form-group col-md-6">

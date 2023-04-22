@@ -11,10 +11,11 @@ using System.Web.UI;
 using BookStore.Models;
 using Microsoft.Owin.BuilderProperties;
 using PagedList;
+using System.IO;
 
 namespace BookStore.Controllers
 {
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles = "Admin")]
     public class BooksController : Controller
     {
         private KhachHang db = new KhachHang();
@@ -32,7 +33,7 @@ namespace BookStore.Controllers
             ViewBag.ImageSortParm = sortOrder == "image" ? "image_desc" : "image";
             ViewBag.UpdateDateSortParm = sortOrder == "updateDate" ? "updateDate_desc" : "updateDate";
             ViewBag.SellNumberSortParm = sortOrder == "sellNumber" ? "sellNumber_desc" : "sellNumber";
-            var books = db.Books.Include(p=>p.publisher).Include(s=>s.subject);
+            var books = db.Books.Include(p => p.publisher).Include(s => s.subject);
 
             if (searchString != null)
             {
@@ -143,12 +144,19 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "bookID,title,unit,price,description,image,updateDate,sellNumber,subjectID,publisherID")] Book book)
+        public ActionResult Create([Bind(Include = "bookID,title,unit,price,description,image,updateDate,sellNumber,subjectID,publisherID")] Book book, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/"),fileName);
+                    book.image = fileName;
+                    image.SaveAs(path);
+                }
                 book.updateDate = DateTime.Now;
-               
+
                 db.Books.Add(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -181,10 +189,17 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "bookID,title,unit,price,description,image,updateDate,sellNumber,subjectID,publisherID")] Book book)
+        public ActionResult Edit([Bind(Include = "bookID,title,unit,price,description,image,updateDate,sellNumber,subjectID,publisherID")] Book book, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                    book.image = fileName;
+                    image.SaveAs(path);
+                }
                 db.Entry(book).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

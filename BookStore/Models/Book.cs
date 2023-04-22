@@ -30,7 +30,7 @@ namespace BookStore.Models
         public decimal price { get; set; }
 
         [Required(ErrorMessage ="Vui lòng nhập mô tả về sách")]
-        [StringLength(50)]
+        [StringLength(1000)]
         [Display(Name ="Mô Tả")]
         public string description { get; set; }
 

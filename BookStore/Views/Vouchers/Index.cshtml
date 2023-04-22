@@ -1,44 +1,63 @@
-﻿@model IEnumerable<BookStore.Models.Voucher>
+﻿@model PagedList.IPagedList<BookStore.Models.Voucher>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2 style="font-weight: 600">Quản lý tác giả</h2>
-<p>
+<h2 style="font-weight: 600">Quản lý voucher</h2>
+<div class="create">
     <a href="@Url.Action("Create")" class="bg-primary btn-lg"><span class="fas fa-plus-circle"></span><span>Tạo mới</span></a>
-</p>
+</div>
+@using (Html.BeginForm("Index", "Vouchers", FormMethod.Get))
+{
+    <div class="search">
+        <span>
+            Tên:
+            <input id="vouchername" name="vouchername" type="text" value="">
+        </span>
+        <input id="Submit1" type="submit" value="Tìm kiếm" />
+    </div>
+}
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-            @Html.Label("", string.Format("{0:N0}", @item.Price), new { style = "font-weight:initial !important;" })
-            </td>
-
-            <td class="action">
-                <a href="@Url.Action("Edit", new { id = item.VoucherID})" style="color: green; text-decoration: none">
-                    <span class="fas fa-edit"></span>
-                </a>
-
-                <a href="@Url.Action("Delete", new { id = item.VoucherID })" style="color: red; text-decoration: none">
-                    <span class="fas fa-trash"></span>
-                </a>
-            </td>
+    <thead class="table-bordered">
+        <tr class="bg-success">
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Tên", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th>
+                <i class="fas fa-sort"></i>
+                @Html.ActionLink("Giá", "Index", new { sortOrder = ViewBag.PriceSortParm })
+            </th>
+            <th>Hành động</th>
         </tr>
-    }
 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.Label("", string.Format("{0:N0}", @item.Price), new { style = "font-weight:initial !important;" })
+                </td>
+
+                <td class="action">
+                    <a href="@Url.Action("Edit", new { id = item.VoucherID})" style="color: green; text-decoration: none">
+                        <span class="fas fa-edit"></span>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.VoucherID })" style="color: red; text-decoration: none">
+                        <span class="fas fa-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        }
+    </thead>
 </table>
+<div style="float: right">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page }))
+</div>

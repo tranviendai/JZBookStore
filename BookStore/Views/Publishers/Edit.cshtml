@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h2>Chỉnh sửa thông tin nhà xuất bản</h2>
+    <h2 style="font-weight: 600; font-size: 27px">Chỉnh sửa thông tin NXB</h2>
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.publisherID)
     <div class="form-group">

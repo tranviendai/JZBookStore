@@ -5,12 +5,11 @@
 }
 
 
-<div>
-    <h2>Xóa thông tin chi tiết đơn hàng</h2>
+    <h2 style="font-weight: 600">Xóa thông tin chi tiết đơn hàng</h2>
     <h4>Bạn có chắc chắn muốn xóa thông tin này không?</h4>
     <dl class="dt-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Bill.nameCustomer)
+            @Html.DisplayNameFor(model => model.Bill.nameCustomer):
         </dt>
 
         <dd>
@@ -18,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Book.title)
+            @Html.DisplayNameFor(model => model.Book.title):
         </dt>
 
         <dd>
@@ -26,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.quantity)
+            @Html.DisplayNameFor(model => model.quantity):
         </dt>
 
         <dd>
@@ -34,7 +33,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.price)
+            @Html.DisplayNameFor(model => model.price):
         </dt>
 
         <dd>
@@ -42,7 +41,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.totalPrice)
+            @Html.DisplayNameFor(model => model.totalPrice):
         </dt>
 
         <dd>
@@ -55,9 +54,11 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Xóa" class="btn btn-danger" />
-            <a href="/DetailsOrders" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
+        <div class="back mb-3 mt-3">
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+                @Html.ActionLink("Quay trở lại", "Index")
+            </div>
+           
         </div>
     }
-</div>
