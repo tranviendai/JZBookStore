@@ -5,6 +5,11 @@
     ViewBag.Title = "ShowCart";
 }
 
+<style>
+    td {
+        vertical-align: middle !important;
+    }
+</style>
 
 @if (Model.Total() != 0)
 {
@@ -24,12 +29,12 @@
             @foreach (var item in Model.Items)
             {
                 decimal total = Convert.ToDecimal(item.book.price * item.quantity);
-                <tr style="height:200px;align-items:center;">
+                <tr style="height:200px; align-items:center;">
                  
                     <td>
                         <img src="@item.book.image" height="200px;" />
                     </td>
-                    <td style="width:200px;">@item.book.title</td>
+                    <td style="width: 200px;">@item.book.title</td>
                     <td style="width: 200px;">@Html.Label("", string.Format("{0:N0}", @item.book.price), new {style= "font-weight:initial !important;" }) @item.book.unit</td>
                     <td>
                         @using (Html.BeginForm("UpdateCart", "Cart"))

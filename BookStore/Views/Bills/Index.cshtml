@@ -46,10 +46,7 @@
                 <i class="fas fa-sort"></i>
                 @Html.ActionLink("Ngày giao", "Index", new { sortOrder = ViewBag.DeliveryDateSortParm })
             </th>
-            <th>
-                <i class="fas fa-sort"></i>
-                @Html.ActionLink("Tên Người Nhận", "Index", new { sortOrder = ViewBag.NameCustomerSortParm })
-            </th>
+
             <th>
                 <i class="fas fa-sort"></i>
                 @Html.ActionLink("Địa chỉ nhận", "Index", new { sortOrder = ViewBag.DeliveryAddressSortParm })
@@ -58,61 +55,56 @@
                 <i class="fas fa-sort"></i>
                 @Html.ActionLink("SĐT", "Index", new { sortOrder = ViewBag.ShipPhoneDateSortParm })
             </th>
+
             <th>
                 <i class="fas fa-sort"></i>
-                @Html.ActionLink("Hình thức GH", "Index", new { sortOrder = ViewBag.PaymentSortParm })
-            </th>
-            <th>
-                <i class="fas fa-sort"></i>
-                @Html.ActionLink("Hình Thức TT", "Index", new { sortOrder = ViewBag.DeliveryFormSortParm })
-            </th>
-            <th>
                 Giảm Giá
             </th>
             <th>
                 <i class="fas fa-sort"></i>
                 @Html.ActionLink("Tổng HĐ", "Index", new { sortOrder = ViewBag.PriceSortParm })
             </th>
+            <th>
+                
+            </th>
         </tr>
 
-        @foreach (var item in Model)
+        @for(int item = 0; item < Model.Count; item++)
         {
-            if (User.Identity.Name == item.KhachHang.Email || User.IsInRole("Admin"))
+            if (User.Identity.Name == Model[item].KhachHang.Email || User.IsInRole("Admin"))
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.KhachHang.FullName)
+                        @Html.DisplayFor(modelItem => Model[item].KhachHang.FullName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.date)
+                        @Html.DisplayFor(modelItem => Model[item].date)
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.delivered)
+                        @Html.DisplayFor(modelItem => Model[item].delivered)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.deliveryDate)
+                        @Html.DisplayFor(modelItem => Model[item].deliveryDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.nameCustomer)
+                        @Html.DisplayFor(modelItem => Model[item].deliveryAddress)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.deliveryAddress)
+                        @Html.DisplayFor(modelItem => Model[item].shipPhone)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[item].Voucher.Price)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.shipPhone)
+                        @Html.DisplayFor(modelItem => Model[item].price)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.payment)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.deliveryForm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Voucher.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.price)
+
+                    <td class="action">
+                        <a href="@Url.Action("Details", new { id = Model[item].billID })" style="color: blue; text-decoration: none">
+                            <span class="fas fa-eye"></span>
+                        </a>
                     </td>
                 </tr>
             }

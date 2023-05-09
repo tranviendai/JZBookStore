@@ -53,5 +53,7 @@ namespace BookStore.Models
         public string Id { get; set; }
         [ForeignKey("Id")]
         public ApplicationUser KhachHang { get; set; }
+
+        public ICollection<DetailsOrder> detailsOrders { get; set; }
     }
 }

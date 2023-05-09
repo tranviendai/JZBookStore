@@ -13,6 +13,10 @@ namespace BookStore.Models
         public int VoucherID { get; set; }
         [MaxLength(20)]
         public string Name { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N0}")]
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Vui lòng nhập giá tiền (Voucher)")]
+        [Display(Name = "Giá Voucher")]
         public decimal Price { get; set; }
         public ICollection<Bill> bills { get; set; }
     }

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using BookStore.Models;
@@ -106,20 +107,21 @@ namespace BookStore.Controllers
                 bills = bills.Where(c => c.KhachHang.FullName.Contains(fullname));
             }
 
-            bills = bills.OrderBy(c => c.KhachHang.FullName);
+            bills = bills.OrderBy(c => c.KhachHang.FullName).Include(a=>a.detailsOrders);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(bills.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Bills/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bill bill = db.Bills.Find(id);
+            var bill = await db.Bills.Include(p => p.KhachHang).Include(p => p.Voucher).
+                         Include(p => p.detailsOrders.Select(a=>a.Book)).FirstOrDefaultAsync(m => m.billID == id);
             if (bill == null)
             {
                 return HttpNotFound();

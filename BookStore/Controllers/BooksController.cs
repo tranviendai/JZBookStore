@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -14,12 +15,12 @@ using PagedList;
 
 namespace BookStore.Controllers
 {
-    [Authorize(Roles="Admin")]
     public class BooksController : Controller
     {
         private KhachHang db = new KhachHang();
 
         // GET: Books
+        [Authorize(Roles = "Admin")]
         public ActionResult Index(int? page, string publishername, string currentFilter, string searchString, string subject, string sortOrder)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -116,14 +117,14 @@ namespace BookStore.Controllers
         }
 
         // GET: Books/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
-            if (book == null)
+            var book = await db.Books.Include(p => p.publisher).Include(p => p.subject)
+                        .FirstOrDefaultAsync(m => m.bookID == id); if (book == null)
             {
                 return HttpNotFound();
             }
@@ -131,6 +132,8 @@ namespace BookStore.Controllers
         }
 
         // GET: Books/Create
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Create()
         {
             ViewBag.publisherID = new SelectList(db.Publishers, "publisherID", "name");
@@ -143,6 +146,8 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Create([Bind(Include = "bookID,title,unit,price,description,image,updateDate,sellNumber,subjectID,publisherID")] Book book)
         {
             if (ModelState.IsValid)
@@ -160,6 +165,7 @@ namespace BookStore.Controllers
         }
 
         // GET: Books/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -181,6 +187,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "bookID,title,unit,price,description,image,updateDate,sellNumber,subjectID,publisherID")] Book book)
         {
             if (ModelState.IsValid)
@@ -195,6 +202,7 @@ namespace BookStore.Controllers
         }
 
         // GET: Books/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -210,6 +218,7 @@ namespace BookStore.Controllers
         }
 
         // POST: Books/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

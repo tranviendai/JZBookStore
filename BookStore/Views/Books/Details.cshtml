@@ -9,6 +9,21 @@
     <h2>Chi tiết thông tin sách</h2>
     <dl class="dt-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => Model.image)" height="200px" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.publisher.name)
         </dt>
 
@@ -25,27 +40,28 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.unit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.unit)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.price)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.price)
+            @Html.DisplayFor(model => model.price)    @Html.DisplayFor(model => model.unit)
+
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sellNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sellNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.updateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updateDate)
         </dd>
 
         <dt>
@@ -56,29 +72,7 @@
             @Html.DisplayFor(model => model.description)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.image)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.updateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.updateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.sellNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.sellNumber)
-        </dd>
 
     </dl>
 </div>
