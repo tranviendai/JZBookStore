@@ -16,11 +16,17 @@ namespace BookStore.Models
     public class ApplicationUser : IdentityUser
     {
         [StringLength(24)]
+        [Display(Name ="Họ Tên")]
+        [Required(ErrorMessage ="Vui lòng nhập Họ Tên")]
         public string FullName { get; set; }
         [StringLength(40)]
+        [Display(Name = "Địa Chỉ")]
+        [Required(ErrorMessage ="Vui lòng nhập Địa chỉ")]
         public string Address { get; set; }
         [StringLength(15)]
+        [Display(Name = "Số Điện Thoại")]
         [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage ="Vui lòng nhập số điện thoại")]
         public string Phone { get; set; }
 
         public ICollection<Bill> Bills { get; set; }
