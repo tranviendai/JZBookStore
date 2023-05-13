@@ -5,22 +5,29 @@
     ViewBag.Title = "Home";
 }
 
+
 <div class="row">
+    <h2 style="text-align:center; font-weight: 600">Danh mục Sách</h2>
     @foreach (var item in Model)
     {
-          <a style="text-decoration:none" href="@Url.Action("Details","Books", new { id = item.bookID})">
-              <div class="card col-sm-6 col-md-4 d-flex align-items-stretch book-section" style=" padding:30px; text-align:center;">
-                  <div style="background-color:#f8f8f8; border-radius:20px;">
-                      <img class="card-img-top book-picture" src="@item.image" height="300" >
-                      <div class="card-body">
-                          <h2>@item.title</h2>
-                          <h4 class="card-title">@Html.DisplayFor(model=>item.price) @Html.DisplayFor(model=>item.unit)</h4>
-                          <p class="card-text">@item.publisher.name</p>
-                          <a href="/Cart/AddCart/@item.bookID" class="btn btn-primary add-cart">Thêm Vào Giỏ</a>
-                      </div>
-                      <br />
-                  </div>
-              </div>
-          </a>
+        <div class="card col-sm-6 col-md-4 d-flex align-items-stretch book-section" style=" padding:30px; text-align:center;">
+            <div style="background: #f8f8f8; margin-left: 26px; border-radius: 20px; box-shadow: 0px 0px 0px 1px inset, 0px 0px 0px 1px #000000; width: 86% ">
+                <a href="/Home/ChiTietSach/@item.bookID">
+                    <img class="card-img-top book-picture" src="~/Images/@item.image" height="300" style="box-shadow: 0px 0px 0px 1px inset, 0px 0px 0px 1px #000000;">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title" style="font-size:20px; font-weight: 600;">@item.title</h4>
+                    <h4 class="card-text">@item.price</h4>
+                    <p class="card-text">@item.publisher.name</p>
+                    <a href="/Cart/AddCart/@item.bookID" class="btn btn-primary add-cart">Thêm Vào Giỏ</a>
+                </div>
+                <br />
+            </div>
+        </div>
     }
+</div>
+<div style="float: right">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Home",
+                    new { page }))
 </div>

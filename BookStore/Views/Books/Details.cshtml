@@ -6,25 +6,25 @@
 
 
 <div>
-    <h2>Chi tiết thông tin sách</h2>
+    <h2 style="font-weight: 600">Chi tiết thông tin sách</h2>
     <dl class="dt-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.image)
+            @Html.DisplayNameFor(model => model.image):
         </dt>
 
         <dd>
-            <img src="@Html.DisplayFor(model => Model.image)" height="200px" />
+            <img src="~/Images/@Model.image" style="height: 180px;" />
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.title)
+            @Html.DisplayNameFor(model => model.title):
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.publisher.name)
+            @Html.DisplayNameFor(model => model.publisher.name):
         </dt>
 
         <dd>
@@ -32,7 +32,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.subject.name)
+            @Html.DisplayNameFor(model => model.subject.name):
         </dt>
 
         <dd>
@@ -40,7 +40,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.price)
+            @Html.DisplayNameFor(model => model.price):
         </dt>
 
         <dd>
@@ -50,14 +50,14 @@
 
 
         <dt>
-            @Html.DisplayNameFor(model => model.sellNumber)
+            @Html.DisplayNameFor(model => model.sellNumber):
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.sellNumber)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.updateDate)
+            @Html.DisplayNameFor(model => model.updateDate):
         </dt>
 
         <dd>
@@ -65,7 +65,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.description)
+            @Html.DisplayNameFor(model => model.description):
         </dt>
 
         <dd>
@@ -77,6 +77,6 @@
     </dl>
 </div>
 <p>
-    <a href="@Url.Action("Edit", new { id = Model.bookID})" class="btn btn-success">Sửa</a>
-    <a href="/Books" style="text-decoration: none">Quay trở lại</a>
+    <a href="@Url.Action("Edit", new { id = Model.bookID})" class="btn btn-success" style="margin-right: 10px;">Sửa</a>
+    <a href="/Books/Index" style="text-decoration: none">Quay trở lại</a>
 </p>

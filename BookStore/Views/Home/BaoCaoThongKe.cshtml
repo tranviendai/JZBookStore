@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "BaoCaoThongKe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script>
+<div class="cards">
+    <div class="card-single" style="background-color: orange">
+        <div>
+            <span>Khách hàng</span>
+            <h1>@ViewBag.TotalKH</h1>
+        </div>
+        <div style="font-size: 40px">
+            <span class="fas fa-users"></span>
+        </div>
+    </div>
+
+    <div class="card-single" style="background-color: green">
+        <div>
+            <span>Sách</span>
+            <h1>@ViewBag.TotalBook</h1>
+        </div>
+        <div style="font-size: 40px">
+            <span class="fas fa-book"></span>
+        </div>
+    </div>
+
+    <div class="card-single" style="background-color: blue">
+        <div>
+            <span>Đơn hàng</span>
+            <h1>@ViewBag.TotalCart</h1>
+        </div>
+        <div style="font-size: 40px">
+            <span class="fas fa-shopping-cart"></span>
+        </div>
+    </div>
+
+    <div class="card-single" style="background-color: red">
+        <div>
+            <span>Thu nhập</span>
+            <h1>@ViewBag.TotalTien</h1>
+        </div>
+        <div style="font-size: 40px">
+            <span class="fas fa-wallet"></span>
+        </div>
+    </div>
+</div>
+<div class="graph-Box">
+    <div class="boxs">
+        <h2>Tổng số tiền</h2>
+        <canvas id="myDoughnutChart"></canvas>
+    </div>
+    <div class="boxs">
+        <h2>Tổng số lượng</h2>
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var barCanvas = document.getElementById('myChart');
+    var bookid = [];
+    var quantity = [];
+    var totalPrice = [];
+
+    @if (Model.Count>0)
+    {
+        foreach(var item in Model)
+                {
+            @:bookid.push(@item.Book);
+                    @:quantity.push(@item.quantity);
+                    @:totalPrice.push(@item.totalPrice);
+                    @:bookid.push(@item.Book)
+                }
+    }
+    var doughnutChart = new Chart(myDoughnutChart, {
+        type: 'bar',
+        data: {
+            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5"],
+            datasets: [{
+                data: totalPrice,
+                borderWidth: 0,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(157, 230, 41)',
+                    'rgb(41, 224, 230)',
+                    'rgb(255, 255, 0)'
+                ],
+                hoverBackgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(157, 230, 41)',
+                    'rgb(41, 224, 230)',
+                    'rgb(255, 255, 0)'
+                ]
+            }]
+        },
+        options: {
+            scale: {
+                ticks: {
+                    display: true,
+                    stepSize: 20
+                }
+            },
+            legend: {
+                position: "bottom",
+                labels: {
+                    boxWidth: 11,
+                    fontColor: "#757681",
+                    fontSize: 11
+                }
+            }
+        }
+    });
+
+    var quantity = {
+        label: 'quantity',
+        data: quantity,
+        backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(157, 230, 41)',
+            'rgb(41, 224, 230)',
+            'rgb(255, 255, 0)',
+        ],
+        borderWidth: 0,
+        lineTension: 0,
+        hoverBackgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(157, 230, 41)',
+            'rgb(41, 224, 230)',
+            'rgb(255, 255, 0)'
+        ]
+
+    };
+    var datasetvalues = {
+        labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5"],//x-axis label values
+        datasets: [quantity]//y-axis
+    };
+    var chartOptions = {
+        scales: {
+            xAxes: [{
+                barPercentage: 1,//Percent (0-1) of the available width each bar should
+                categoryPercentage: 0.6,//Percent (0-1) of the available width each category
+            }],
+            yAxes: [{
+                barPercentage: 1,
+                categoryPercentage: 0.6,
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+        }
+    };
+    var barChart = new Chart(myChart, {
+        type: 'doughnut',
+        data: datasetvalues,
+        options: chartOptions
+    });
+</script>
+
+
+
+
+

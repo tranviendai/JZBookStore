@@ -4,9 +4,12 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using BookStore.Models;
+using PagedList;
 
 namespace BookStore.Controllers
 {
@@ -15,9 +18,43 @@ namespace BookStore.Controllers
         private KhachHang db = new KhachHang();
 
         // GET: Vouchers
-        public ActionResult Index()
+        public ActionResult Index(int? page, string vouchername, string currentFilter, string searchString, string price, string sortOrder)
         {
-            return View(db.Vouchers.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "price" ? "price_desc" : "price";
+            var vouchers = from v in db.Vouchers
+                           select v;
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    vouchers = vouchers.OrderByDescending(c => c.Name);
+                    break;
+                case "price":
+                    vouchers = vouchers.OrderBy(c => c.Price);
+                    break;
+                case "subject_desc":
+                    vouchers = vouchers.OrderByDescending(c => c.Price);
+                    break;
+            }
+            if (!string.IsNullOrEmpty(vouchername))
+            {
+                vouchers = vouchers.Where(c => c.Name.Contains(vouchername));
+            }
+            vouchers = vouchers.OrderBy(c => c.Name);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(vouchers.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Vouchers/Details/5

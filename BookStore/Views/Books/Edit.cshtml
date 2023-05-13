@@ -9,94 +9,114 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h2>Chỉnh sửa thông tin sách</h2>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.bookID)
+<div class="form-horizontal">
+    <h2 style="font-weight: 600">Chỉnh sửa thông tin sách</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.bookID)
+    @Html.HiddenFor(model => model.image)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
-            <div class="mb-3 mt-3">
-                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.unit, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
-            <div class="mb-3 mt-3">
-                @Html.EditorFor(model => model.unit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.unit, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
-            <div class="mb-3 mt-3">
-                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
-            <div class="mb-3 mt-3">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
-            <div class="mb-3 mt-3">
-                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.updateDate, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
-            <div class="mb-3 mt-3">
-                @Html.EditorFor(model => model.updateDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.updateDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.sellNumber, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
-            <div class="mb-3 mt-3">
-                @Html.EditorFor(model => model.sellNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.sellNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.subjectID, "subjectID", htmlAttributes: new { @class = "control-label mb-3 mt-3" })
-            <div class="mb-3 mt-3">
-                @Html.DropDownList("subjectID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.subjectID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.publisherID, "publisherID", htmlAttributes: new { @class = "control-label mb-3 mt-3" })
-            <div class="mb-3 mt-3">
-                @Html.DropDownList("publisherID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.publisherID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="back mb-3 mt-3">
-                <input type="submit" value="Lưu" class="btn btn-primary" style="margin-right: 10px;" />
-                @Html.ActionLink("Quay trở lại", "Index")
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+        <div class="mb-3 mt-3">
+            @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
         </div>
     </div>
-}
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.unit, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+        <div class="mb-3 mt-3">
+            @Html.DropDownListFor(model => model.unit,
+                                                     new List<SelectListItem>
+                                                     {
+                                              new SelectListItem {Text = "VND"},
+                                              new SelectListItem {Text = "USD"},
+                                                             }, new { @class = "form-control", Style = "max-width:370px!important" })
+            @Html.ValidationMessageFor(model => model.unit, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+        <div class="mb-3 mt-3">
+            @{ Html.EnableClientValidation(false); }
+            @Html.EditorFor(Model => Model.price, new { htmlAttributes = new { @class = "form-control" } })
+            @{ Html.EnableClientValidation(true); }
+            @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+        <div class="mb-3 mt-3">
+            @Html.TextAreaFor(model => model.description, new { @class = "form-control", Style = "height:200px;max-width:370px!important;resize:inherit " })
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessage("file")
+        @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+        <div class="mb-3 mt-3">
+            <img src="~/Images/@Model.image" style="height: 180px; width: auto; box-shadow: 0px 0px 0px 1px inset, 0px 0px 0px 1px #b3b0b0;
+                margin-bottom: 10px; margin-top: 5px; margin-left: 1px;" id="previewImage" />
+            <input type="file" name="image" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
+            @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.updateDate, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+        <div class="mb-3 mt-3">
+            @Html.EditorFor(model => model.updateDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.updateDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sellNumber, htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+        <div class="mb-3 mt-3">
+            @Html.EditorFor(model => model.sellNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sellNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.subject.name, "Chủ Đề", htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+        <div class="mb-3 mt-3">
+            @Html.DropDownList("subjectID", null, htmlAttributes: new { @class = "form-control", Style = "max-width:370px!important" })
+            @Html.ValidationMessageFor(model => model.subject.name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.publisher.name, "Nhà Xuất Bản", htmlAttributes: new { @class = "control-label mb-3 mt-3" })
+        <div class="mb-3 mt-3">
+            @Html.DropDownList("publisherID", null, htmlAttributes: new { @class = "form-control", Style = "max-width:370px!important" })
+            @Html.ValidationMessageFor(model => model.publisher.name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="back mb-3 mt-3">
+            <input type="submit" value="Lưu" class="btn btn-primary" style="margin-right: 10px;" />
+            @Html.ActionLink("Quay trở lại", "Index")
+        </div>
+    </div>
+</div>
+}
+<script>
+    function ShowImagePreview(imageUploader, previewImage) {
+        if (imageUploader.files && imageUploader.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $(previewImage).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(imageUploader.files[0]);
+        }
+    }
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

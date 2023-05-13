@@ -1,164 +1,253 @@
-﻿@model List<BookStore.Models.DetailsOrder>
+﻿@model PagedList.IPagedList<BookStore.Models.Book>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Home";
 }
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script>
-<div class="cards">
-    <div class="card-single" style="background-color: orange">
-        <div>
-            <h1>54</h1>
-            <span>Khách hàng</span>
+@*<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script>
+    <div class="cards">
+        <div class="card-single" style="background-color: orange">
+            <div>
+                <h1>54</h1>
+                <span>Khách hàng</span>
+            </div>
+            <div style="font-size: 40px">
+                <span class="fas fa-users"></span>
+            </div>
         </div>
-        <div style="font-size: 40px">
-            <span class="fas fa-users"></span>
-        </div>
-    </div>
 
-    <div class="card-single" style="background-color: green">
-        <div>
-            <h1>79</h1>
-            <span>Sách</span>
+        <div class="card-single" style="background-color: green">
+            <div>
+                <h1>79</h1>
+                <span>Sách</span>
+            </div>
+            <div style="font-size: 40px">
+                <span class="fas fa-book"></span>
+            </div>
         </div>
-        <div style="font-size: 40px">
-            <span class="fas fa-book"></span>
-        </div>
-    </div>
 
-    <div class="card-single" style="background-color: blue">
-        <div>
-            <h1>124</h1>
-            <span>Đơn hàng</span>
+        <div class="card-single" style="background-color: blue">
+            <div>
+                <h1>124</h1>
+                <span>Đơn hàng</span>
+            </div>
+            <div style="font-size: 40px">
+                <span class="fas fa-shopping-cart"></span>
+            </div>
         </div>
-        <div style="font-size: 40px">
-            <span class="fas fa-shopping-cart"></span>
-        </div>
-    </div>
 
-    <div class="card-single" style="background-color: red">
-        <div>
-            <h1>126tr</h1>
-            <span>Thu nhập</span>
+        <div class="card-single" style="background-color: red">
+            <div>
+                <h1>126tr</h1>
+                <span>Thu nhập</span>
+            </div>
+            <div style="font-size: 40px">
+                <span class="fas fa-wallet"></span>
+            </div>
         </div>
-        <div style="font-size: 40px">
-            <span class="fas fa-wallet"></span>
+    </div>
+    <div class="graph-Box">
+        <div class="boxs">
+            <h2>Tổng số lượng</h2>
+            <canvas id="myDoughnutChart"></canvas>
+        </div>
+        <div class="boxs">
+            <h2>Tổng số tiền</h2>
+            <canvas id="myChart"></canvas>
         </div>
     </div>
-</div>
-<div class="graph-Box">
-    <div class="boxs">
-        <h2>Tổng số lượng</h2>
-        <canvas id="myDoughnutChart"></canvas>
-    </div>
-    <div class="boxs">
-        <h2>Tổng số tiền</h2>
-        <canvas id="myChart"></canvas>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    var barCanvas = document.getElementById('myChart');
-    var bookid = [];
-    var quantity = [];
-    var totalPrice = [];
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var barCanvas = document.getElementById('myChart');
+        var bookid = [];
+        var quantity = [];
+        var totalPrice = [];
 
-    @if (Model.Count>0)
-    {
-        foreach(var item in Model)
-                {
-            @:bookid.push(@item.Book);
-                    @:quantity.push(@item.quantity);
-                    @:totalPrice.push(@item.totalPrice);
-                    @:bookid.push(@item.Book)
-                }
-    }
-    var doughnutChart = new Chart(myDoughnutChart, {
-        type: 'bar',
-        data: {
-            labels: ["1", "2", "3", "4", "5"],
-            datasets: [{
-                data: totalPrice,
-                borderWidth: 0,
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(157, 230, 41)',
-                    'rgb(41, 224, 230)',
-                    'rgb(255, 255, 0)'
-                ],
-                hoverBackgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(157, 230, 41)',
-                    'rgb(41, 224, 230)',
-                    'rgb(255, 255, 0)'
-                ]
-            }]
-        },
-        options: {
-            scale: {
-                ticks: {
-                    display: true,
-                    stepSize: 20
-                }
+        @if (Model.Count>0)
+        {
+            foreach(var item in Model)
+                    {
+                @:bookid.push(@item.Book);
+                        @:quantity.push(@item.quantity);
+                        @:totalPrice.push(@item.totalPrice);
+                        @:bookid.push(@item.Book)
+                    }
+        }
+        var doughnutChart = new Chart(myDoughnutChart, {
+            type: 'bar',
+            data: {
+                labels: ["1", "2", "3", "4", "5"],
+                datasets: [{
+                    data: totalPrice,
+                    borderWidth: 0,
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(157, 230, 41)',
+                        'rgb(41, 224, 230)',
+                        'rgb(255, 255, 0)'
+                    ],
+                    hoverBackgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(157, 230, 41)',
+                        'rgb(41, 224, 230)',
+                        'rgb(255, 255, 0)'
+                    ]
+                }]
             },
-            legend: {
-                position: "bottom",
-                labels: {
-                    boxWidth: 11,
-                    fontColor: "#757681",
-                    fontSize: 11
+            options: {
+                scale: {
+                    ticks: {
+                        display: true,
+                        stepSize: 20
+                    }
+                },
+                legend: {
+                    position: "bottom",
+                    labels: {
+                        boxWidth: 11,
+                        fontColor: "#757681",
+                        fontSize: 11
+                    }
                 }
             }
-        }
-    });
+        });
 
-    var quantity = {
-        label: 'quantity',
-        data: quantity,
-        backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(157, 230, 41)',
-            'rgb(41, 224, 230)',
-            'rgb(255, 255, 0)',
-        ],
-        borderWidth: 0,
-        lineTension: 0,
-        hoverBackgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(157, 230, 41)',
-            'rgb(41, 224, 230)',
-            'rgb(255, 255, 0)'
-        ]
+        var quantity = {
+            label: 'quantity',
+            data: quantity,
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(157, 230, 41)',
+                'rgb(41, 224, 230)',
+                'rgb(255, 255, 0)',
+            ],
+            borderWidth: 0,
+            lineTension: 0,
+            hoverBackgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(157, 230, 41)',
+                'rgb(41, 224, 230)',
+                'rgb(255, 255, 0)'
+            ]
 
-    };
-    var datasetvalues = {
-        labels: ["1", "2", "3", "4", "5"],//x-axis label values
-        datasets: [quantity]//y-axis
-    };
-    var chartOptions = {
-        scales: {
-            xAxes: [{
-                barPercentage: 1,//Percent (0-1) of the available width each bar should
-                categoryPercentage: 0.6,//Percent (0-1) of the available width each category
-            }],
-            yAxes: [{
-                barPercentage: 1,
-                categoryPercentage: 0.6,
-                ticks: {
-                    beginAtZero: true
+        };
+        var datasetvalues = {
+            labels: ["1", "2", "3", "4", "5"],//x-axis label values
+            datasets: [quantity]//y-axis
+        };
+        var chartOptions = {
+            scales: {
+                xAxes: [{
+                    barPercentage: 1,//Percent (0-1) of the available width each bar should
+                    categoryPercentage: 0.6,//Percent (0-1) of the available width each category
+                }],
+                yAxes: [{
+                    barPercentage: 1,
+                    categoryPercentage: 0.6,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            }
+        };
+        var barChart = new Chart(myChart, {
+            type: 'doughnut',
+            data: datasetvalues,
+            options: chartOptions
+        });
+    </script>
+*@
+
+@if (User.Identity.IsAuthenticated == true)
+{
+    if (User.IsInRole("Admin") == true)
+    {
+        <style>
+            .grid {
+                width: 1200px;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .grid__row {
+                display: flex;
+                flex-wrap: wrap;
+                margin-left: -12px;
+                margin-right: -12px;
+            }
+
+            .grid__colum-12 {
+                padding-left: 12px;
+                padding-right: 12px;
+                width: 100%;
+            }
+
+            .page__title {
+                font-size: 40px;
+                line-height: 40px;
+                margin: 30px 0;
+                text-align: center;
+            }
+
+            .page__content {
+                font-size: 16px;
+                line-height: 1.6;
+                margin-bottom: 30px;
+            }
+
+                .page__content p {
+                    margin-top: 20px;
+                    font-size: 17px;
+                    text-align: justify;
                 }
-            }],
-        }
-    };
-    var barChart = new Chart(myChart, {
-        type: 'doughnut',
-        data: datasetvalues,
-        options: chartOptions
-    });
-</script>
-
+        </style>
+        <div class="grid">
+            <div class="grid__row">
+                <div class="grid__colum-12">
+                    <div class="page__title">
+                        Chào mừng tới phần mềm quản lý bán sách
+                    </div>
+                    <div class="page__content">
+                        <p>Quản lý bán sách là một phần mềm giúp cho người quản lý sách tạo kho sách của một nhà sản xuất hay trung tâm phát hành sách có thể quản lý một khối lượng lớn đầ sách mà không mất nhiều công sức để tìm kiếm thông tin một đầu sách nào đó</p>
+                        <p>Từ hệ thống quản lý này mà người quản lý có thể tra cứu số lượng mộtđầu sách nhập về hoặc bán ra và còn lại trong kho là bao nhiêu để tử đó đưara quyết định của mình, tính toán và lập hoá đơn cho khách hàng, thông kê báo cáo doanh thu theo theo yêu cầu nhà quản lý.</p>
+                        <p>Mục đích chính của hệ thống là ứng dụng công nghệ thông tin vào hoạtđộng kinh doanh nhỏ lẻ . Chi tiết hơn là quản lý hệ thống nhà sách . Nhằm nâng cao chất trong việc quản lý cửa hàng, giúp  đơn giản việc quản lý sách nhanh chóng, hiệu quả hơn so với cách làm truyền thống. Đồng giúp tiết kiệm thời gian, chi phí và sức lực.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <h2 style="text-align:center; font-weight: 600">Danh mục Sách</h2>
+            @foreach (var item in Model)
+            {
+                <div class="card col-sm-6 col-md-4 d-flex align-items-stretch book-section" style=" padding:30px; text-align:center;">
+                    <div style="background: #f8f8f8; margin-left: 26px; border-radius: 20px; box-shadow: 0px 0px 0px 1px inset, 0px 0px 0px 1px #000000; width: 86% ">
+                        <a href="/Home/ChiTietSach/@item.bookID">
+                            <img class="card-img-top book-picture" src="~/Images/@item.image" height="300" style="box-shadow: 0px 0px 0px 1px inset, 0px 0px 0px 1px #000000;">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title" style="font-size:20px; font-weight: 600;">@item.title</h4>
+                            <h4 class="card-text">@item.price</h4>
+                            <p class="card-text">@item.publisher.name</p>
+                            <a href="/Cart/AddCart/@item.bookID" class="btn btn-primary add-cart">Thêm Vào Giỏ</a>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            }
+        </div>
+        <div style="float: right">
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Home",
+                            new { page }))
+        </div>
+    }
+}
 
 

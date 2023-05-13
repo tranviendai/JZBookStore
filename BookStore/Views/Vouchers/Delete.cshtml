@@ -4,35 +4,35 @@
     ViewBag.Title = "Delete";
 }
 
-    <div>
-        <h2>Xóa Voucher</h2>
-        <h4>Bạn có chắc chắn muốn xóa thông tin này không?</h4>
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+<div>
+    <h2 style="font-weight: 600">Xóa Voucher</h2>
+    <h4>Bạn có chắc chắn muốn xóa thông tin này không?</h4>
+    <dl class="dt-horizontal">
+        <dt>
+            Tên:
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price):
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Price)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
 
-        </dl>
+    </dl>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Xóa" class="btn btn-danger" />
-        <a href="/Vouchers" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
-    </div>
-        }
-    </div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a href="/Vouchers/Index" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
+        </div>
+    }
+</div>

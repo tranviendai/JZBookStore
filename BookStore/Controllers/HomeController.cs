@@ -17,10 +17,23 @@ namespace BookStore.Controllers
     public class HomeController : Controller
     {
         KhachHang db = new KhachHang();
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchBy, string titleBook, string publisherBook, string searchNKH)
         {
-            var detailorderList = GetDetailOrderList();
-            return View(detailorderList);
+            int pageSize = 10;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var books = db.Books.Include(p => p.publisher).Include(s => s.subject);
+
+            IPagedList<Book> lb = null;
+            lb = books.ToList().OrderBy(t => t.updateDate).ToPagedList(pageIndex, pageSize);
+            if (searchBy == "Tìm Chuyến Bay")
+            {
+                return View(books.Where(s => s.title.StartsWith(titleBook)).ToList().ToPagedList(pageIndex, pageSize).
+                    Where(s => s.publisher.name.StartsWith(publisherBook)).ToList().ToPagedList(pageIndex, pageSize));
+            }
+            return View(lb);
+            //var detailorderList = GetDetailOrderList();
+            //return View(detailorderList);
         }
         public List<DetailsOrder> GetDetailOrderList()
         {
@@ -48,6 +61,27 @@ namespace BookStore.Controllers
             }
             return View(lb);
         }
+        public ActionResult BaoCaoThongKe()
+        {
+            var TotalKH = db.Roles.GroupBy(s => s.Id == "KhachHang") 
+                .Select(g => g.Count()).Sum();
+            var TotalBook = db.Books.GroupBy(s => s.bookID)
+                .Select(g => g.Count()).Sum();
+            var TotalCart = db.Bills.GroupBy(s => s.billID)
+                .Select(g => g.Count()).Sum();
+            var TotalTien = (from s in db.Bills select s).Sum(e => e.price);
+            ViewBag.TotalTien = TotalTien;    
+            ViewBag.TotalKH = TotalKH;
+            ViewBag.TotalBook = TotalBook;
+            ViewBag.TotalCart = TotalCart;
 
+            var detailorderList = GetDetailOrderList();
+            return View(detailorderList);
+        }
+        public ActionResult ChiTietSach(int id)
+        {
+            var sach = db.Books.FirstOrDefault(s => s.bookID == id);
+            return View(sach);
+        }
     }
 }

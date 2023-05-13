@@ -6,7 +6,7 @@
 
 
 <div>
-    <h2>Chi tiết thông tin hóa đơn</h2>
+    <h2 style="font-weight: 600">Chi tiết thông tin hóa đơn</h2>
     <table class="table">
         <thead class="table-bordered">
             <tr>
@@ -20,7 +20,7 @@
             {
                 <tr>
                     <td>
-                        <img src="@Html.DisplayFor(modelItem => item.Book.image)" height="200px"  />
+                        <img src="~/Images/@item.Book.image" style="height: 180px;" />
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Book.title)
@@ -122,6 +122,6 @@
     </dl>
 </div>
 <p>
-    <a href="@Url.Action("Edit", new { id = Model.billID})" class="btn btn-success">Sửa</a>
-    <a href="/Bills" style="text-decoration: none">Quay trở lại</a>
+    <a href="@Url.Action("Edit", new { id = Model.billID})" class="btn btn-success"style="margin-right: 10px;">Sửa</a>
+    <a href="/Bills/Index" style="text-decoration: none">Quay trở lại</a>
 </p>

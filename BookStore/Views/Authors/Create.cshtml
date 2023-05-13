@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h2>Tạo mới thông tin tác giả</h2>
+        <h2 style="font-weight: 600;">Tạo mới thông tin tác giả</h2>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label mb-3 mt-3" })

@@ -94,6 +94,8 @@ namespace BookStore.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.billID = new SelectList(db.Bills, "billID", "nameCustomer", detailsOrder.billID);
+            ViewBag.bookID = new SelectList(db.Books, "bookID", "title", detailsOrder.bookID);
             return View(detailsOrder);
         }
 
@@ -171,6 +173,8 @@ namespace BookStore.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.billID = new SelectList(db.Bills, "billID", "nameCustomer", detailsOrder.billID);
+            ViewBag.bookID = new SelectList(db.Books, "bookID", "title", detailsOrder.bookID);
             return View(detailsOrder);
         }
 
@@ -182,6 +186,8 @@ namespace BookStore.Controllers
             DetailsOrder detailsOrder = db.DetailsOrders.Find(id);
             db.DetailsOrders.Remove(detailsOrder);
             db.SaveChanges();
+            ViewBag.billID = new SelectList(db.Bills, "billID", "nameCustomer", detailsOrder.billID);
+            ViewBag.bookID = new SelectList(db.Books, "bookID", "title", detailsOrder.bookID);
             return RedirectToAction("Index");
         }
 

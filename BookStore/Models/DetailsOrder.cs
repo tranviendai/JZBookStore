@@ -24,12 +24,14 @@ namespace BookStore.Models
         [Display(Name ="Số lượng")]
         public int quantity { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
         [Display(Name ="Đơn giá")]
-        [DisplayFormat(DataFormatString = "{0:N0}")]
+        [DataType(DataType.Currency)]
         public decimal price { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
         [Display(Name = "Thành Tiền")]
-        [DisplayFormat(DataFormatString = "{0:N0}")]
+        [DataType(DataType.Currency)]        
         public decimal totalPrice { get; set; }
 
 

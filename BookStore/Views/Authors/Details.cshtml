@@ -6,7 +6,7 @@
 
 
 <div>
-    <h2>Chi tiết thông tin tác giả</h2>
+    <h2 style="font-weight: 600;" >Chi tiết thông tin tác giả</h2>
     <dl class="dt-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.name):
@@ -36,5 +36,5 @@
 </div>
 <p>
     <a href="@Url.Action("Edit", new { id = Model.authorID})" class="btn btn-success">Sửa</a>
-    <a href="/Authors" style="text-decoration: none">Quay trở lại</a>
+    <a href="/Authors/Index" style="text-decoration: none">Quay trở lại</a>
 </p>

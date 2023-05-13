@@ -4,11 +4,11 @@
     ViewBag.Title = "Delete";
 }
 <div>
-    <h2>Xóa thông tin tác giả</h2>
+    <h2 style="font-weight: 600;">Xóa thông tin tác giả</h2>
     <h4>Bạn có chắc chắn muốn xóa thông tin này không?</h4>
     <dl class="dt-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.name):
         </dt>
 
         <dd>
@@ -16,7 +16,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.address)
+            @Html.DisplayNameFor(model => model.address):
         </dt>
 
         <dd>
@@ -24,7 +24,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.phone)
+            @Html.DisplayNameFor(model => model.phone):
         </dt>
 
         <dd>
@@ -39,7 +39,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Xóa" class="btn btn-danger" />
-            <a href="/Authors" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
+            <a href="/Authors/Index" style="text-decoration: none; margin-left: 10px">Quay trở lại</a>
         </div>
     }
 </div>

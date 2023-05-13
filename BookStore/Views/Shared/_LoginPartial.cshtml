@@ -8,7 +8,7 @@
         <div class="dropdown">
             <span class="fas fa-caret-down" onclick="toggleMenu()"></span>
         </div>
-        <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu-wrap" id="subMenu" style=" right: -20px;">
             <div class="sub-menu">
                 <div class="user-info">
                     @Html.ActionLink("Xin chào " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

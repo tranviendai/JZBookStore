@@ -10,41 +10,47 @@
             {
                 @Html.AntiForgeryToken()
                 <h2 style="text-align:center">Đăng ký</h2>
-                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email, new { @class = "mb-3 mt-3 control-label" })
                     <div class="mb-3 mt-3">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Password, new { @class = "mb-3 mt-3 control-label" })
                     <div class="mb-3 mt-3">
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.ConfirmPassword, new { @class = "mb-3 mt-3 control-label" })
                     <div class="mb-3 mt-3">
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.FullName, new { @class = "mb-3 mt-3 control-label" })
                     <div class="mb-3 mt-3">
                         @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Address, new { @class = "mb-3 mt-3 control-label" })
                     <div class="mb-3 mt-3">
                         @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Phone, new { @class = "mb-3 mt-3 control-label" })
                     <div class="mb-3 mt-3">
                         @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -52,6 +58,9 @@
                         <input type="submit" class="btn btn-success" value="Đăng ký" style="width: 100%; background: #68B984" />
                     </div>
                 </div>
+                <p style="text-align:center; text-decoration: none!important">
+                    Đã có tài khoản? <a style="text-decoration:none" href="/Account/Login">Đăng nhập ngay</a>
+                </p>
             }
         </section>
     </div>

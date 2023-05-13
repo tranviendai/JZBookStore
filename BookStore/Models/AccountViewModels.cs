@@ -48,14 +48,15 @@ namespace BookStore.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Email")]
         [Display(Name = "Email")]
         [EmailAddress]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Trường Email không phải là địa chỉ email hợp lệ.")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Mật khẩu")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]
@@ -64,17 +65,19 @@ namespace BookStore.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Email")]
         [EmailAddress]
         [Display(Name = "Email")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Trường Email không phải là địa chỉ email hợp lệ.")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "Mật khảu phải dài hơn 6.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Vui lòng nhập Mật Khẩu")]
+        [StringLength(100, ErrorMessage = "Mật Khẩu phải dài hơn 6.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mật Khẩu")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng nhập Xác Nhận Mật Khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Xác Nhận Mật Khẩu")]
         [Compare("Password", ErrorMessage = "Mật khẩu không trùng khớp.")]

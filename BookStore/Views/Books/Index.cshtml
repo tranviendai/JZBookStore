@@ -17,11 +17,11 @@
 {
     <div class="search">
         <span>
-            Họ tên:
+            Tên sách:
             <input id="publishername" name="publishername" type="text" value="">
         </span>
         <span>
-            Chủ đề sách:
+            Chủ đề:
             <input id="subject" name="subject" type="text" value="">
         </span>
         <input id="Submit1" type="submit" value="Tìm kiếm" />
@@ -68,7 +68,7 @@
         {
             <tr>
                 <td>
-                    <img src="@Html.DisplayFor(modelItem => item.image)" height="200px" />
+                    <img src="~/Images/@item.image" style="height: 180px; width: 120px;" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.title)
@@ -106,7 +106,7 @@
     </thead>
 </table>
 <div style="float: right">
-    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) của @Model.PageCount
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
     @Html.PagedListPager(Model, page => Url.Action("Index",
             new { page }))
 </div>

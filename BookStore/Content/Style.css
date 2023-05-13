@@ -25,7 +25,6 @@
 
 .sidebar-brand {
     height: 90px;
-    padding: 1rem 1rem 2rem 2rem;
 }
 
     .sidebar-brand a {
@@ -178,7 +177,6 @@ header {
 .sub-menu-wrap {
     position: absolute;
     top: 100%;
-    right: -10px;
     width: 320px;
     max-height: 0px;
     overflow: hidden;

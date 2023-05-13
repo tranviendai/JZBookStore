@@ -7,10 +7,10 @@
 
 
 <div>
-    <h2>Chi tiết thông tin nhà xuất bản</h2>
+    <h2 style="font-weight: 600">Chi tiết thông tin NXB</h2>
     <dl class="dt-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.name):
         </dt>
 
         <dd>
@@ -18,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.address)
+            @Html.DisplayNameFor(model => model.address):
         </dt>
 
         <dd>
@@ -26,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.phone)
+            @Html.DisplayNameFor(model => model.phone):
         </dt>
 
         <dd>
@@ -37,5 +37,5 @@
 </div>
 <p>
     <a href="@Url.Action("Edit", new { id = Model.publisherID})" class="btn btn-success">Sửa</a>
-    <a href="/Publishers" style="text-decoration: none">Quay trở lại</a>
+    <a href="/Publishers/Index" style="text-decoration: none">Quay trở lại</a>
 </p>

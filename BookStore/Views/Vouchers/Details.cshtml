@@ -4,14 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>Voucher</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <h2 style="font-weight: 600">Chi tiết thông tin Voucher</h2>
+    <dl class="dt-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            Tên:
         </dt>
 
         <dd>
@@ -19,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Price):
         </dt>
 
         <dd>
@@ -29,6 +27,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VoucherID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Edit", new { id = Model.VoucherID})" class="btn btn-success" style="margin-right: 10px;">Sửa</a>
+    <a href="/Vouchers/Index" style="text-decoration: none">Quay trở lại</a>
 </p>
