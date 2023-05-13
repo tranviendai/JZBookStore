@@ -531,3 +531,4 @@ D:\QLBS-DAPM-LTWNC\tranviendai\JzBookStore\BookStore\obj\Debug\BookStore.Migrati
 D:\QLBS-DAPM-LTWNC\tranviendai\JzBookStore\BookStore\obj\Debug\BookStore.Migrations.datalength.resources
 D:\QLBS-DAPM-LTWNC\tranviendai\JzBookStore\BookStore\obj\Debug\BookStore.Migrations.image1.resources
 D:\QLBS-DAPM-LTWNC\tranviendai\JzBookStore\BookStore\obj\Debug\BookStore.Migrations.hinhanh.resources
+D:\QLBS-DAPM-LTWNC\tranviendai\JzBookStore\BookStore\obj\Debug\BookStore.Migrations.db1.resources

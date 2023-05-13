@@ -262,6 +262,10 @@
     <Compile Include="Migrations\202305121538281_hinhanh.designer.cs">
       <DependentUpon>202305121538281_hinhanh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305130528578_db1.cs" />
+    <Compile Include="Migrations\202305130528578_db1.designer.cs">
+      <DependentUpon>202305130528578_db1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Author.cs" />
@@ -461,6 +465,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305121538281_hinhanh.resx">
       <DependentUpon>202305121538281_hinhanh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305130528578_db1.resx">
+      <DependentUpon>202305130528578_db1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

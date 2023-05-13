@@ -23,7 +23,7 @@ namespace BookStore.Models
         [Display(Name ="Đơn Vị")]
         public string unit { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:0.00.###}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage ="Vui lòng nhập giá tiền")]
         [Display(Name = "Giá Tiền")]
@@ -36,7 +36,6 @@ namespace BookStore.Models
 
         [DataType(DataType.Upload)]
         [DisplayFormat(ApplyFormatInEditMode = true)]
-        [Required(ErrorMessage ="Vui lòng chọn hình ảnh")]
         [Display(Name ="Hình Ảnh")]
         public string image { get; set; }
 

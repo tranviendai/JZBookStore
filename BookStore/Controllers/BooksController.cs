@@ -198,21 +198,18 @@ namespace BookStore.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "bookID,title,unit,price,description,image,updateDate,sellNumber,subjectID,publisherID")] Book book, HttpPostedFileBase image)
         {
-            if (ModelState.IsValid != true)
+            if (ModelState.IsValid)
             {
-
-
                 if (image != null)
                 {
                     var fileName = Path.GetFileName(image.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-
-
-                    image.SaveAs(path);
                     book.image = fileName;
-                    db.Entry(book).State = EntityState.Modified;
-                    db.SaveChanges();
+                    image.SaveAs(path);
+                
                 }
+                db.Entry(book).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.publisherID = new SelectList(db.Publishers, "publisherID", "name", book.publisherID);
